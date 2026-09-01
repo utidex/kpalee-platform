@@ -14,7 +14,10 @@ import {
   Award,
   Users,
   BarChart3,
-  ChevronRight
+  ChevronRight,
+  Shield,
+  Send,
+  CheckCircle2
 } from 'lucide-react';
 import hero3DStageImg from '../assets/hero_3d_stage.png';
 
@@ -84,7 +87,7 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
         zIndex: 0
       }} />
 
-      {/* Main 2-Column Hero Showcase (Matching Reference Design) */}
+      {/* Main 2-Column Hero Showcase */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
@@ -197,25 +200,131 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
 
         </div>
 
-        {/* Right Column: 3D Stage Floating Image Graphic Showcase */}
+        {/* Right Column: Exact User 3D Stage Image with Independent Floating Animations */}
         <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
-          <div className="animate-float-slow" style={{ width: '100%', maxWidth: '580px', position: 'relative' }}>
-            <img
-              src={hero3DStageImg}
-              alt="Kpalee 3D Certificate & Event Participant Badge Stage Showcase"
+          <div style={{ width: '100%', maxWidth: '620px', position: 'relative' }}>
+            
+            {/* Main Stage Base Image (Slow Floating Cycle 7s) */}
+            <div className="animate-float-main">
+              <img
+                src={hero3DStageImg}
+                alt="Kpalee 3D Podium Certificate Showcase Stage"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                  filter: 'drop-shadow(0 25px 45px rgba(6, 26, 22, 0.16))'
+                }}
+              />
+            </div>
+
+            {/* Floating Element 1: Top-Left Security Shield Badge (4.8s cycle) */}
+            <div
+              className="animate-float-slow-1 glass-panel"
               style={{
-                width: '100%',
-                height: 'auto',
-                display: 'block',
-                filter: 'drop-shadow(0 25px 40px rgba(6, 26, 22, 0.14))'
+                position: 'absolute',
+                top: '12%',
+                left: '2%',
+                padding: '0.5rem 0.85rem',
+                borderRadius: '999px',
+                background: '#ffffff',
+                border: '1.5px solid var(--kpalee-emerald)',
+                boxShadow: '0 10px 25px rgba(0,168,120,0.25)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.45rem',
+                zIndex: 10
               }}
-            />
+            >
+              <Shield size={16} color="var(--kpalee-emerald)" />
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)' }}>
+                Tamper-Proof Seal
+              </span>
+            </div>
+
+            {/* Floating Element 2: Top-Right Ribbon Honor Badge (6.2s cycle) */}
+            <div
+              className="animate-float-slow-2 glass-panel"
+              style={{
+                position: 'absolute',
+                top: '8%',
+                right: '4%',
+                padding: '0.5rem 0.85rem',
+                borderRadius: '999px',
+                background: '#ffffff',
+                border: '1.5px solid var(--kpalee-teal)',
+                boxShadow: '0 10px 25px rgba(15,118,110,0.25)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.45rem',
+                zIndex: 10
+              }}
+            >
+              <Award size={16} color="var(--kpalee-teal)" />
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)' }}>
+                Official Credential
+              </span>
+            </div>
+
+            {/* Floating Element 3: Bottom-Left QR Code Verified Badge (5.5s cycle) */}
+            <div
+              className="animate-float-slow-3 glass-panel"
+              style={{
+                position: 'absolute',
+                bottom: '14%',
+                left: '-2%',
+                padding: '0.55rem 0.95rem',
+                borderRadius: 'var(--radius-md)',
+                background: '#ffffff',
+                border: '1.5px solid var(--kpalee-emerald)',
+                boxShadow: '0 12px 30px rgba(0,168,120,0.3)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.6rem',
+                zIndex: 10
+              }}
+            >
+              <div style={{ background: 'var(--kpalee-mint-soft)', padding: '0.35rem', borderRadius: '8px' }}>
+                <QrCode size={20} color="var(--kpalee-emerald)" />
+              </div>
+              <div>
+                <strong style={{ fontSize: '0.78rem', color: 'var(--kpalee-dark-bg)', display: 'block', lineHeight: 1.2 }}>
+                  Scan to Verify ✓
+                </strong>
+                <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Cryptographic ID Check</span>
+              </div>
+            </div>
+
+            {/* Floating Element 4: Bottom-Right Instant Delivery Badge (7.5s cycle) */}
+            <div
+              className="animate-float-slow-4 glass-panel"
+              style={{
+                position: 'absolute',
+                bottom: '10%',
+                right: '-2%',
+                padding: '0.5rem 0.85rem',
+                borderRadius: '999px',
+                background: '#ffffff',
+                border: '1.5px solid var(--kpalee-emerald)',
+                boxShadow: '0 10px 25px rgba(0,168,120,0.25)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.45rem',
+                zIndex: 10
+              }}
+            >
+              <Send size={15} color="var(--kpalee-emerald)" />
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)' }}>
+                Instant Delivery
+              </span>
+            </div>
+
           </div>
         </div>
 
       </div>
 
-      {/* Bottom 4 Feature Cards Grid (Matching Attached Reference Image) */}
+      {/* Bottom 4 Feature Cards Grid */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',

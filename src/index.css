@@ -95,18 +95,48 @@ body {
 .font-pinyon { font-family: var(--font-pinyon); }
 .font-alex { font-family: var(--font-alex); }
 
-/* Slow Floating Picture Keyframe Animation */
-@keyframes floatSlow {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-14px) rotate(1deg);
-  }
+/* ==========================================
+   INDEPENDENT FLOATING KEYFRAME ANIMATIONS
+   ========================================== */
+
+@keyframes floatMain {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float-main {
+  animation: floatMain 7s ease-in-out infinite;
 }
 
-.animate-float-slow {
-  animation: floatSlow 6s ease-in-out infinite;
+@keyframes floatSlow1 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(-3deg); }
+}
+.animate-float-slow-1 {
+  animation: floatSlow1 4.8s ease-in-out infinite;
+}
+
+@keyframes floatSlow2 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-13px) rotate(4deg); }
+}
+.animate-float-slow-2 {
+  animation: floatSlow2 6.2s ease-in-out infinite;
+}
+
+@keyframes floatSlow3 {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-18px) scale(1.05); }
+}
+.animate-float-slow-3 {
+  animation: floatSlow3 5.5s ease-in-out infinite;
+}
+
+@keyframes floatSlow4 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(-5deg); }
+}
+.animate-float-slow-4 {
+  animation: floatSlow4 7.5s ease-in-out infinite;
 }
 
 /* Feature Grid Card Hover Glow */
