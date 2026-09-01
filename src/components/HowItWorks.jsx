@@ -46,7 +46,7 @@ export default function HowItWorks() {
     <section style={{ padding: '5rem 1.25rem 6rem 1.25rem', maxWidth: '1280px', margin: '0 auto', overflow: 'visible' }}>
       
       {/* Section Header */}
-      <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 3.5rem auto' }}>
+      <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 4rem auto' }}>
         <span className="badge badge-emerald" style={{ marginBottom: '0.85rem', padding: '0.35rem 0.9rem' }}>
           FRICTIONLESS WORKFLOW
         </span>
@@ -54,12 +54,12 @@ export default function HowItWorks() {
           How Kpalee Works
         </h2>
         <p style={{ fontSize: '1.08rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
-          From bulk recipient upload to instant certificate delivery — issuing credentials has never been this smooth.
+          Scroll down to see step cards collapse over each other in sequence.
         </p>
       </div>
 
-      {/* Sticky Stacking Collapsing Scroll Cards Container (PC & Mobile Compatible) */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', position: 'relative', overflow: 'visible' }}>
+      {/* Sticky Stacking Collapsing Scroll Cards Container */}
+      <div style={{ display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'visible', paddingBottom: '4rem' }}>
         {steps.map((step, idx) => {
           const Icon = step.icon;
           return (
@@ -67,15 +67,15 @@ export default function HowItWorks() {
               key={step.num}
               style={{
                 position: 'sticky',
-                top: `${95 + idx * 22}px`,
+                top: `${110 + idx * 30}px`,
                 zIndex: idx + 1,
                 background: '#ffffff',
                 border: '1.5px solid var(--border-color)',
                 borderRadius: 'var(--radius-lg)',
-                padding: '2.5rem 2.25rem',
-                boxShadow: `0 ${10 + idx * 6}px ${25 + idx * 8}px rgba(6, 26, 22, ${0.08 + idx * 0.03})`,
-                transition: 'all 0.3s ease',
-                marginBottom: '1.5rem'
+                padding: '2.75rem 2.5rem',
+                boxShadow: `0 ${12 + idx * 8}px ${35 + idx * 10}px rgba(6, 26, 22, ${0.1 + idx * 0.04})`,
+                marginBottom: idx === steps.length - 1 ? '0' : '6rem',
+                transition: 'transform 0.2s ease, box-shadow 0.2s ease'
               }}
             >
               <div style={{
@@ -88,7 +88,7 @@ export default function HowItWorks() {
                 {/* Left Step Details */}
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginBottom: '1rem' }}>
-                    <span style={{ fontSize: '2.4rem', fontWeight: 900, color: step.color, lineHeight: 1 }}>
+                    <span style={{ fontSize: '2.5rem', fontWeight: 900, color: step.color, lineHeight: 1 }}>
                       {step.num}
                     </span>
                     <span
@@ -98,7 +98,7 @@ export default function HowItWorks() {
                         border: `1px solid ${step.color}40`,
                         padding: '0.35rem 0.85rem',
                         borderRadius: '999px',
-                        fontSize: '0.72rem',
+                        fontSize: '0.75rem',
                         fontWeight: 800,
                         letterSpacing: '0.06em'
                       }}
@@ -107,11 +107,11 @@ export default function HowItWorks() {
                     </span>
                   </div>
 
-                  <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)', marginBottom: '0.75rem' }}>
+                  <h3 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)', marginBottom: '0.75rem' }}>
                     {step.title}
                   </h3>
 
-                  <p style={{ fontSize: '1rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                  <p style={{ fontSize: '1.02rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
                     {step.desc}
                   </p>
                 </div>
@@ -120,7 +120,7 @@ export default function HowItWorks() {
                 <div style={{
                   background: step.bgColor,
                   borderRadius: 'var(--radius-md)',
-                  padding: '1.25rem',
+                  padding: '1.35rem',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -131,20 +131,20 @@ export default function HowItWorks() {
                     <img
                       src={stepPreviewImg}
                       alt="CSV Recipient Import Illustration"
-                      style={{ width: '100%', maxHeight: '180px', objectFit: 'contain', borderRadius: 'var(--radius-sm)' }}
+                      style={{ width: '100%', maxHeight: '185px', objectFit: 'contain', borderRadius: 'var(--radius-sm)' }}
                     />
                   ) : (
                     <div style={{
                       width: '100%',
-                      padding: '1.35rem',
+                      padding: '1.4rem',
                       background: '#ffffff',
                       borderRadius: 'var(--radius-sm)',
                       textAlign: 'center',
                       border: '1px solid var(--border-color)'
                     }}>
                       <div style={{
-                        width: '54px',
-                        height: '54px',
+                        width: '56px',
+                        height: '56px',
                         borderRadius: '14px',
                         background: step.bgColor,
                         color: step.color,
@@ -153,12 +153,12 @@ export default function HowItWorks() {
                         justifyContent: 'center',
                         margin: '0 auto 0.65rem auto'
                       }}>
-                        <Icon size={26} />
+                        <Icon size={28} />
                       </div>
-                      <strong style={{ fontSize: '0.92rem', color: 'var(--kpalee-dark-bg)', display: 'block' }}>
+                      <strong style={{ fontSize: '0.95rem', color: 'var(--kpalee-dark-bg)', display: 'block' }}>
                         {step.title} Preview
                       </strong>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Automated Kpalee Workflow</span>
+                      <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Automated Kpalee Workflow</span>
                     </div>
                   )}
                 </div>
