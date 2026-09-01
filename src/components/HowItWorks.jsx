@@ -1,5 +1,6 @@
 import React from 'react';
 import { UploadCloud, Users, Sparkles, Send, CheckCircle2, ArrowRight } from 'lucide-react';
+import stepPreviewImg from '../assets/step_preview.png';
 
 export default function HowItWorks() {
   const steps = [
@@ -10,39 +11,43 @@ export default function HowItWorks() {
       icon: UploadCloud,
       badge: 'FLEXIBLE SETUP',
       color: '#00a878',
-      bgColor: '#f0fdf4'
+      bgColor: '#f0fdf4',
+      previewType: 'template_choice'
     },
     {
       num: '02',
       title: 'Add recipients',
-      desc: 'Import your attendee list via CSV/Excel spreadsheet or enter recipients manually in seconds.',
+      desc: 'Import your attendee list via CSV/Excel spreadsheet or enter recipients manually in seconds with automatic column mapping.',
       icon: Users,
       badge: 'BULK IMPORT',
       color: '#0f766e',
-      bgColor: '#ccfbf1'
+      bgColor: '#ccfbf1',
+      previewType: 'csv_import'
     },
     {
       num: '03',
       title: 'Personalize & generate',
-      desc: 'Map dynamic recipient fields (Name, Date, ID, Signature, QR Code) and preview batch output.',
+      desc: 'Map dynamic recipient fields (Name, Date, ID, Signature, QR Code) and preview batch output before issuance.',
       icon: Sparkles,
       badge: 'AUTO MAPPING',
       color: '#3359df',
-      bgColor: '#eff6ff'
+      bgColor: '#eff6ff',
+      previewType: 'field_map'
     },
     {
       num: '04',
       title: 'Deliver & celebrate',
-      desc: 'Certificates are generated. Recipients receive their personal links to view, download, and share.',
+      desc: 'Certificates are generated. Recipients receive personal links to view, download, and share on LinkedIn & WhatsApp.',
       icon: Send,
       badge: 'ZERO LOGIN NEEDED',
       color: '#d97706',
-      bgColor: '#fffbeb'
+      bgColor: '#fffbeb',
+      previewType: 'email_share'
     }
   ];
 
   return (
-    <section style={{ padding: '6rem 2rem 8rem 2rem', maxWidth: '1100px', margin: '0 auto' }}>
+    <section style={{ padding: '6rem 2rem 8rem 2rem', maxWidth: '1380px', margin: '0 auto' }}>
       
       {/* Section Header */}
       <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 4.5rem auto' }}>
@@ -57,7 +62,7 @@ export default function HowItWorks() {
         </p>
       </div>
 
-      {/* Sticky Stacking Collapsing Cards Container */}
+      {/* Sticky Stacking Collapsing Cards Container (Wider & Taller) */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem', position: 'relative' }}>
         {steps.map((step, idx) => {
           const Icon = step.icon;
@@ -66,28 +71,29 @@ export default function HowItWorks() {
               key={step.num}
               style={{
                 position: 'sticky',
-                top: `${120 + idx * 25}px`,
+                top: `${110 + idx * 30}px`,
                 zIndex: idx + 1,
                 background: '#ffffff',
                 border: '1.5px solid var(--border-color)',
                 borderRadius: 'var(--radius-lg)',
-                padding: '3rem 3.5rem',
-                boxShadow: `0 ${10 + idx * 8}px ${30 + idx * 10}px rgba(6, 26, 22, ${0.06 + idx * 0.03})`,
+                padding: '3.5rem 4rem',
+                minHeight: '340px',
+                boxShadow: `0 ${12 + idx * 8}px ${35 + idx * 10}px rgba(6, 26, 22, ${0.07 + idx * 0.03})`,
                 transition: 'all 0.3s ease',
-                marginBottom: '1rem'
+                marginBottom: '1.5rem'
               }}
             >
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                gap: '2.5rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                gap: '3rem',
                 alignItems: 'center'
               }}>
                 
-                {/* Left Card Details */}
+                {/* Left Step Details */}
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
-                    <span style={{ fontSize: '2.6rem', fontWeight: 900, color: step.color, lineHeight: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1.1rem', marginBottom: '1.25rem' }}>
+                    <span style={{ fontSize: '2.8rem', fontWeight: 900, color: step.color, lineHeight: 1 }}>
                       {step.num}
                     </span>
                     <span
@@ -95,9 +101,9 @@ export default function HowItWorks() {
                         background: step.bgColor,
                         color: step.color,
                         border: `1px solid ${step.color}40`,
-                        padding: '0.35rem 0.85rem',
+                        padding: '0.4rem 0.95rem',
                         borderRadius: '999px',
-                        fontSize: '0.75rem',
+                        fontSize: '0.78rem',
                         fontWeight: 800,
                         letterSpacing: '0.06em'
                       }}
@@ -106,38 +112,60 @@ export default function HowItWorks() {
                     </span>
                   </div>
 
-                  <h3 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)', marginBottom: '0.85rem' }}>
+                  <h3 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)', marginBottom: '0.85rem' }}>
                     {step.title}
                   </h3>
 
-                  <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', lineHeight: 1.65 }}>
+                  <p style={{ fontSize: '1.08rem', color: 'var(--text-muted)', lineHeight: 1.65 }}>
                     {step.desc}
                   </p>
                 </div>
 
-                {/* Right Visual Icon Box */}
+                {/* Right Visual Image Placeholder / Graphic Mockup */}
                 <div style={{
                   background: step.bgColor,
                   borderRadius: 'var(--radius-md)',
-                  padding: '2.5rem',
+                  padding: '1.5rem',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: `1px solid ${step.color}25`
+                  border: `1.5px solid ${step.color}30`,
+                  boxShadow: '0 10px 25px rgba(0,0,0,0.04)'
                 }}>
-                  <div style={{
-                    width: '74px',
-                    height: '74px',
-                    borderRadius: '20px',
-                    background: '#ffffff',
-                    color: step.color,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    boxShadow: '0 10px 25px rgba(0,0,0,0.08)'
-                  }}>
-                    <Icon size={36} />
-                  </div>
+                  {step.previewType === 'csv_import' ? (
+                    <img
+                      src={stepPreviewImg}
+                      alt="CSV Recipient Import Illustration"
+                      style={{ width: '100%', maxHeight: '200px', objectFit: 'contain', borderRadius: 'var(--radius-sm)' }}
+                    />
+                  ) : (
+                    <div style={{
+                      width: '100%',
+                      padding: '1.75rem',
+                      background: '#ffffff',
+                      borderRadius: 'var(--radius-sm)',
+                      textAlign: 'center',
+                      border: '1px solid var(--border-color)'
+                    }}>
+                      <div style={{
+                        width: '64px',
+                        height: '64px',
+                        borderRadius: '16px',
+                        background: step.bgColor,
+                        color: step.color,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        margin: '0 auto 0.85rem auto'
+                      }}>
+                        <Icon size={32} />
+                      </div>
+                      <strong style={{ fontSize: '1rem', color: 'var(--kpalee-dark-bg)', display: 'block' }}>
+                        {step.title} Step Preview
+                      </strong>
+                      <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Interactive UI Studio Automation</span>
+                    </div>
+                  )}
                 </div>
 
               </div>

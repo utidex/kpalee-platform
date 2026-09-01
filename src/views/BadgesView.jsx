@@ -1,11 +1,40 @@
 import React, { useState } from 'react';
-import { Sparkles, Calendar, MapPin, Users, Award, ArrowRight, CheckCircle2, Ticket, Share2, Camera } from 'lucide-react';
+import { Sparkles, Calendar, MapPin, Users, Ticket, Camera, ArrowRight, CheckCircle2, ChevronRight, ChevronLeft } from 'lucide-react';
 import { MOCK_EVENTS } from '../services/mockData';
 
 export default function BadgesView({ onSelectEventForDP, onToast }) {
   const [selectedEventModal, setSelectedEventModal] = useState(null);
   const [claimEmail, setClaimEmail] = useState('');
   const [isClaimed, setIsClaimed] = useState(false);
+
+  // Extended Trending Events Dataset
+  const trendingEvents = [
+    ...MOCK_EVENTS,
+    {
+      id: 'evt-fintech-gala',
+      name: 'Pan-African Fintech Gala',
+      organizer: 'Fintech Leaders Council',
+      date: 'November 18, 2026',
+      location: 'Eko Convention Centre, Lagos',
+      attendeesCount: 2100,
+      coverColor: 'linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%)',
+      badgeType: 'Fintech Delegate',
+      badgeTitle: 'FINTECH LEADER',
+      description: 'Celebrating high-growth payment infrastructure founders and neobanks across Africa.'
+    },
+    {
+      id: 'evt-dev-conf',
+      name: 'West Africa DevCon 2026',
+      organizer: 'Developer Community Africa',
+      date: 'December 4, 2026',
+      location: 'Abuja International Conference Centre',
+      attendeesCount: 3400,
+      coverColor: 'linear-gradient(135deg, #065f46 0%, #059669 100%)',
+      badgeType: 'Developer Pass',
+      badgeTitle: 'SOFTWARE ENGINEER',
+      description: 'Deep-dive engineering sessions on cloud infrastructure, AI models, and distributed databases.'
+    }
+  ];
 
   const handleClaim = (e) => {
     e.preventDefault();
@@ -14,8 +43,15 @@ export default function BadgesView({ onSelectEventForDP, onToast }) {
     if (onToast) onToast('Attendance confirmed! Badge claimed 🎉');
   };
 
+  const scrollMarquee = (direction) => {
+    const el = document.getElementById('kpalee-events-marquee');
+    if (el) {
+      el.scrollBy({ left: direction === 'left' ? -380 : 380, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="animate-slide-up" style={{ padding: '3rem 2rem 5rem 2rem', maxWidth: '1350px', margin: '0 auto' }}>
+    <div className="animate-slide-up" style={{ padding: '3rem 2rem 5rem 2rem', maxWidth: '1440px', margin: '0 auto' }}>
       
       {/* Badges Hero */}
       <div className="glass-panel-dark" style={{
@@ -29,12 +65,12 @@ export default function BadgesView({ onSelectEventForDP, onToast }) {
           <Sparkles size={14} color="var(--kpalee-emerald-light)" /> Digital Event Identity & Badges
         </span>
 
-        <h1 className="font-serif" style={{ fontSize: '3.2rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.25rem', lineHeight: 1.15 }}>
+        <h1 className="font-serif" style={{ fontSize: '3.4rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.25rem', lineHeight: 1.15 }}>
           You were there. <br />
           <span style={{ color: 'var(--kpalee-emerald-light)' }}>Now make it official.</span>
         </h1>
 
-        <p style={{ maxWidth: '720px', color: '#d1f2e4', fontSize: '1.1rem', lineHeight: 1.6, margin: '0 auto 2.25rem auto' }}>
+        <p style={{ maxWidth: '750px', color: '#d1f2e4', fontSize: '1.12rem', lineHeight: 1.6, margin: '0 auto 2.25rem auto' }}>
           Turn event attendance into digital proof you can show off. Claim your official attendee badge, download your custom event Display Picture (DP), and share with your network.
         </p>
 
@@ -51,26 +87,51 @@ export default function BadgesView({ onSelectEventForDP, onToast }) {
         </div>
       </div>
 
-      {/* Events Worth Remembering Grid */}
-      <div style={{ marginBottom: '2.5rem' }}>
-        <h2 className="font-serif" style={{ fontSize: '2.2rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)', marginBottom: '0.5rem' }}>
-          Events Worth Remembering
-        </h2>
-        <p style={{ fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '2.25rem' }}>
-          Select an event you attended to claim your digital badge or generate a custom profile picture frame.
-        </p>
+      {/* Trending Events Horizontal Scrolling Marquee */}
+      <div style={{ marginBottom: '4rem' }}>
+        
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
+          <div>
+            <h2 className="font-serif" style={{ fontSize: '2.4rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)', marginBottom: '0.35rem' }}>
+              Trending Events & Badges
+            </h2>
+            <p style={{ fontSize: '1.02rem', color: 'var(--text-muted)' }}>
+              Scroll through active events to claim your attendee credential or generate custom social profile frames.
+            </p>
+          </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-          gap: '2rem'
-        }}>
-          {MOCK_EVENTS.map((evt) => (
+          {/* Marquee Navigation Scroll Controls */}
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <button
+              onClick={() => scrollMarquee('left')}
+              className="btn-secondary"
+              style={{ padding: '0.55rem 0.85rem', borderRadius: '50%' }}
+              title="Scroll Left"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              onClick={() => scrollMarquee('right')}
+              className="btn-secondary"
+              style={{ padding: '0.55rem 0.85rem', borderRadius: '50%' }}
+              title="Scroll Right"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        </div>
+
+        {/* Horizontal Scrolling Track */}
+        <div
+          id="kpalee-events-marquee"
+          className="horizontal-scroll-container"
+        >
+          {trendingEvents.map((evt) => (
             <div
               key={evt.id}
-              className="glass-panel"
+              className="horizontal-scroll-item glass-panel"
               style={{
-                padding: '2rem',
+                padding: '1.75rem',
                 borderRadius: 'var(--radius-lg)',
                 background: '#ffffff',
                 display: 'flex',
@@ -102,11 +163,11 @@ export default function BadgesView({ onSelectEventForDP, onToast }) {
                   position: 'relative',
                   overflow: 'hidden'
                 }}>
-                  <span className="badge badge-emerald" style={{ position: 'absolute', top: '12px', right: '12px', background: 'rgba(255,255,255,0.2)', color: '#fff', fontSize: '0.65rem' }}>
+                  <span className="badge badge-emerald" style={{ position: 'absolute', top: '12px', right: '12px', background: 'rgba(255,255,255,0.25)', color: '#fff', fontSize: '0.65rem' }}>
                     {evt.badgeType}
                   </span>
 
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, marginBottom: '0.35rem' }}>
+                  <h3 style={{ fontSize: '1.3rem', fontWeight: 800, marginBottom: '0.35rem' }}>
                     {evt.name}
                   </h3>
                   <span style={{ fontSize: '0.8rem', opacity: 0.9, letterSpacing: '0.08em', fontWeight: 700 }}>
@@ -127,7 +188,7 @@ export default function BadgesView({ onSelectEventForDP, onToast }) {
                   </div>
                 </div>
 
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.55, marginBottom: '1.5rem' }}>
+                <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', lineHeight: 1.55, marginBottom: '1.5rem' }}>
                   {evt.description}
                 </p>
               </div>
@@ -141,23 +202,24 @@ export default function BadgesView({ onSelectEventForDP, onToast }) {
                     setClaimEmail('');
                   }}
                   className="btn-primary"
-                  style={{ flex: 1, justifyContent: 'center', padding: '0.65rem', fontSize: '0.88rem' }}
+                  style={{ flex: 1, justifyContent: 'center', padding: '0.6rem', fontSize: '0.85rem' }}
                 >
-                  <Ticket size={16} /> Claim Badge
+                  <Ticket size={15} /> Claim Badge
                 </button>
 
                 <button
                   onClick={() => onSelectEventForDP(evt)}
                   className="btn-accent"
-                  style={{ justifyContent: 'center', padding: '0.65rem 0.9rem', fontSize: '0.88rem' }}
+                  style={{ justifyContent: 'center', padding: '0.6rem 0.85rem', fontSize: '0.85rem' }}
                   title="Generate Social Profile DP"
                 >
-                  <Camera size={16} /> Get DP
+                  <Camera size={15} /> Get DP
                 </button>
               </div>
             </div>
           ))}
         </div>
+
       </div>
 
       {/* Badge Claim Modal */}
