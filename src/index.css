@@ -54,13 +54,18 @@
   padding: 0;
 }
 
-body {
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden !important;
   background-color: var(--bg-main);
   color: var(--text-main);
   font-family: var(--font-sans);
   min-height: 100vh;
-  overflow-x: hidden;
   line-height: 1.6;
+}
+
+body {
   background-image: 
     radial-gradient(circle at 10% 10%, rgba(0, 168, 120, 0.06) 0%, transparent 45%),
     radial-gradient(circle at 90% 90%, rgba(15, 118, 110, 0.05) 0%, transparent 45%),
@@ -70,8 +75,8 @@ body {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #e6f9f0;
@@ -94,18 +99,18 @@ body {
 .font-pinyon { font-family: var(--font-pinyon); }
 .font-alex { font-family: var(--font-alex); }
 
-/* Horizontal Scrolling Carousel / Marquee Track */
+/* Horizontal Scrolling Carousel Track */
 .horizontal-scroll-container {
   display: flex;
-  gap: 1.75rem;
+  gap: 1.5rem;
   overflow-x: auto;
   padding: 1rem 0.5rem 1.5rem 0.5rem;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
+  width: 100%;
 }
 .horizontal-scroll-item {
-  flex: 0 0 360px;
+  flex: 0 0 320px;
   scroll-snap-align: start;
 }
 
@@ -133,7 +138,7 @@ body {
   background: linear-gradient(135deg, var(--kpalee-emerald), var(--kpalee-emerald-hover));
   color: #ffffff;
   font-weight: 700;
-  padding: 0.75rem 1.6rem;
+  padding: 0.75rem 1.5rem;
   border-radius: var(--radius-sm);
   border: none;
   cursor: pointer;
@@ -142,18 +147,18 @@ body {
   gap: 0.6rem;
   transition: all var(--transition-fast);
   box-shadow: 0 4px 16px rgba(0, 168, 120, 0.35);
+  white-space: nowrap;
 }
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 168, 120, 0.5);
-  background: linear-gradient(135deg, var(--kpalee-emerald-light), var(--kpalee-emerald));
 }
 
 .btn-secondary {
   background: #ffffff;
   color: var(--text-main);
   font-weight: 600;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 1.4rem;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-color);
   cursor: pointer;
@@ -162,19 +167,19 @@ body {
   gap: 0.6rem;
   transition: all var(--transition-fast);
   box-shadow: var(--shadow-sm);
+  white-space: nowrap;
 }
 .btn-secondary:hover {
   background: var(--kpalee-mint-soft);
   border-color: rgba(0, 168, 120, 0.5);
   color: var(--kpalee-emerald);
-  transform: translateY(-1px);
 }
 
 .btn-accent {
   background: linear-gradient(135deg, var(--kpalee-dark-bg), var(--kpalee-teal));
   color: #ffffff;
   font-weight: 600;
-  padding: 0.75rem 1.6rem;
+  padding: 0.75rem 1.5rem;
   border-radius: var(--radius-sm);
   border: none;
   cursor: pointer;
@@ -182,11 +187,7 @@ body {
   align-items: center;
   gap: 0.6rem;
   transition: all var(--transition-fast);
-  box-shadow: 0 4px 16px rgba(6, 26, 22, 0.25);
-}
-.btn-accent:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(6, 26, 22, 0.4);
+  white-space: nowrap;
 }
 
 /* Forms & Inputs */
@@ -195,10 +196,11 @@ body {
   flex-direction: column;
   gap: 0.45rem;
   margin-bottom: 1.2rem;
+  width: 100%;
 }
 
 .form-label {
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--kpalee-dark-bg);
   text-transform: uppercase;
@@ -209,13 +211,13 @@ body {
   background: #ffffff;
   border: 1.5px solid var(--border-color);
   color: var(--text-main);
-  padding: 0.8rem 1.1rem;
+  padding: 0.75rem 1rem;
   border-radius: var(--radius-sm);
   font-size: 0.95rem;
   font-family: inherit;
   outline: none;
+  width: 100%;
   transition: all var(--transition-fast);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
 }
 .input-field:focus {
   border-color: var(--kpalee-emerald);
@@ -226,12 +228,12 @@ body {
   background: #ffffff;
   border: 1.5px solid var(--border-color);
   color: var(--text-main);
-  padding: 0.8rem 1.1rem;
+  padding: 0.75rem 1rem;
   border-radius: var(--radius-sm);
   font-size: 0.95rem;
   outline: none;
   cursor: pointer;
-  transition: border-color var(--transition-fast);
+  width: 100%;
 }
 
 /* Badges */
@@ -273,91 +275,47 @@ body {
 
 /* Certificate Border Themes */
 .cert-border-gold {
-  border: 18px solid #061a16;
+  border: 16px solid #061a16;
   outline: 4px solid var(--kpalee-emerald);
-  outline-offset: -13px;
+  outline-offset: -12px;
   position: relative;
 }
 .cert-border-gold::before {
   content: '';
   position: absolute;
-  inset: 9px;
+  inset: 8px;
   border: 2px solid var(--kpalee-emerald-light);
   pointer-events: none;
 }
 
 .cert-border-royal {
-  border: 22px double #061a16;
-  outline: 3.5px solid var(--kpalee-emerald);
-  outline-offset: -15px;
+  border: 18px double #061a16;
+  outline: 3px solid var(--kpalee-emerald);
+  outline-offset: -13px;
 }
 
 .cert-border-classic {
-  border: 16px solid #0f766e;
-  outline: 5px double var(--kpalee-emerald);
-  outline-offset: -10px;
+  border: 14px solid #0f766e;
+  outline: 4px double var(--kpalee-emerald);
+  outline-offset: -9px;
 }
 
 .cert-border-minimal {
-  border: 2.5px solid var(--kpalee-emerald);
+  border: 2px solid var(--kpalee-emerald);
   outline: 1px solid #cbd5e1;
-  outline-offset: 9px;
+  outline-offset: 8px;
 }
 
 .cert-border-ornate {
-  border: 18px solid #061a16;
+  border: 16px solid #061a16;
   outline: 3px dashed var(--kpalee-emerald);
-  outline-offset: -11px;
-}
-
-/* Comprehensive Mobile Responsiveness Media Queries */
-@media (max-width: 1024px) {
-  .horizontal-scroll-item {
-    flex: 0 0 320px;
-  }
-}
-
-@media (max-width: 768px) {
-  body {
-    font-size: 0.92rem;
-  }
-  
-  h1, .font-serif {
-    font-size: 2.4rem !important;
-  }
-  
-  header div {
-    flex-direction: column;
-    align-items: stretch !important;
-    gap: 0.75rem !important;
-  }
-  
-  nav {
-    overflow-x: auto;
-    width: 100%;
-    justify-content: flex-start !important;
-  }
-
-  .cert-canvas-container {
-    aspect-ratio: auto !important;
-    min-width: 600px !important;
-  }
-  
-  .horizontal-scroll-item {
-    flex: 0 0 290px;
-  }
+  outline-offset: -10px;
 }
 
 /* Keyframe Animations */
 @keyframes slideUpFade {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .animate-slide-up {
@@ -365,7 +323,7 @@ body {
 }
 
 @keyframes popIn {
-  0% { transform: scale(0.92); opacity: 0; }
+  0% { transform: scale(0.94); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
 
@@ -373,20 +331,79 @@ body {
   animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-/* Print Optimization */
-@media print {
-  body {
-    background: #ffffff !important;
-    color: #000000 !important;
+/* Navbar Responsive Display Helpers */
+.desktop-nav {
+  display: flex !important;
+}
+.mobile-hamburger-btn {
+  display: none !important;
+}
+
+/* ==========================================
+   COMPREHENSIVE MOBILE RESPONSIVENESS OVERRIDES
+   ========================================== */
+
+@media (max-width: 1024px) {
+  .horizontal-scroll-item {
+    flex: 0 0 300px;
   }
-  .no-print {
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 0.9rem;
+  }
+
+  .desktop-nav {
     display: none !important;
   }
+
+  .mobile-hamburger-btn {
+    display: inline-flex !important;
+  }
+
+  /* Responsive Headings */
+  h1, .hero-title {
+    font-size: clamp(2.1rem, 7vw, 3.2rem) !important;
+    line-height: 1.2 !important;
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 5vw, 2.5rem) !important;
+    line-height: 1.25 !important;
+  }
+
+  h3 {
+    font-size: clamp(1.3rem, 4vw, 1.8rem) !important;
+  }
+
+  /* Section Padding Reductions */
+  section {
+    padding: 2.5rem 1rem !important;
+  }
+
+  .glass-panel, .glass-panel-dark {
+    padding: 1.5rem 1.1rem !important;
+    border-radius: var(--radius-md) !important;
+  }
+
+  /* Horizontal Scroll Items */
+  .horizontal-scroll-item {
+    flex: 0 0 280px;
+  }
+
+  /* How It Works Sticky Cards on Mobile */
+  .how-it-works-card {
+    position: relative !important;
+    top: auto !important;
+    padding: 1.75rem 1.25rem !important;
+    min-height: auto !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  /* Certificate Canvas Mobile Display */
   .cert-canvas-container {
-    box-shadow: none !important;
-    width: 100% !important;
-    aspect-ratio: auto !important;
-    height: 100vh !important;
-    page-break-after: always;
+    min-width: 540px !important;
+    padding: 1.5rem 1.25rem !important;
   }
 }
