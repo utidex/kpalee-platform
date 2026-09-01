@@ -149,10 +149,6 @@ body {
   box-shadow: 0 4px 16px rgba(0, 168, 120, 0.35);
   white-space: nowrap;
 }
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 168, 120, 0.5);
-}
 
 .btn-secondary {
   background: #ffffff;
@@ -168,11 +164,6 @@ body {
   transition: all var(--transition-fast);
   box-shadow: var(--shadow-sm);
   white-space: nowrap;
-}
-.btn-secondary:hover {
-  background: var(--kpalee-mint-soft);
-  border-color: rgba(0, 168, 120, 0.5);
-  color: var(--kpalee-emerald);
 }
 
 .btn-accent {
@@ -219,10 +210,6 @@ body {
   width: 100%;
   transition: all var(--transition-fast);
 }
-.input-field:focus {
-  border-color: var(--kpalee-emerald);
-  box-shadow: 0 0 0 3px rgba(0, 168, 120, 0.2);
-}
 
 .select-field {
   background: #ffffff;
@@ -253,82 +240,90 @@ body {
   color: #007a57;
   border: 1px solid rgba(0, 168, 120, 0.4);
 }
-.badge-dark {
-  background: rgba(6, 26, 22, 0.08);
-  color: var(--kpalee-dark-bg);
-  border: 1px solid rgba(6, 26, 22, 0.2);
+
+/* ==========================================
+   PROPER RESPONSIVE CERTIFICATE STAGE
+   ========================================== */
+
+.cert-responsive-stage {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: center;
 }
 
-/* Certificate Canvas Container */
 .cert-canvas-container {
   width: 100%;
+  max-width: 820px;
   aspect-ratio: 1.414 / 1;
   position: relative;
   background: #ffffff;
   color: #061a16;
   overflow: hidden;
-  box-shadow: 0 25px 60px rgba(6, 26, 22, 0.16);
+  box-shadow: 0 20px 50px rgba(6, 26, 22, 0.15);
   border-radius: 4px;
   user-select: none;
-  transition: all var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: clamp(1.2rem, 3.5vw, 2.75rem) clamp(1.4rem, 4vw, 3.25rem);
+}
+
+/* Fluid Typography Inside Certificate Canvas */
+.cert-org-header {
+  font-size: clamp(0.65rem, 1.6vw, 0.82rem) !important;
+}
+
+.cert-title-heading {
+  font-size: clamp(1.25rem, 3.2vw, 2.3rem) !important;
+}
+
+.cert-recipient-name {
+  font-size: clamp(2.1rem, 5vw, 3.6rem) !important;
+}
+
+.cert-citation-text {
+  font-size: clamp(0.72rem, 1.8vw, 0.9rem) !important;
+  line-height: 1.45 !important;
+}
+
+.cert-footer-text {
+  font-size: clamp(0.65rem, 1.5vw, 0.82rem) !important;
 }
 
 /* Certificate Border Themes */
 .cert-border-gold {
-  border: 16px solid #061a16;
-  outline: 4px solid var(--kpalee-emerald);
-  outline-offset: -12px;
+  border: clamp(8px, 2vw, 18px) solid #061a16;
+  outline: clamp(2px, 0.5vw, 4px) solid var(--kpalee-emerald);
+  outline-offset: clamp(-6px, -1.2vw, -12px);
   position: relative;
-}
-.cert-border-gold::before {
-  content: '';
-  position: absolute;
-  inset: 8px;
-  border: 2px solid var(--kpalee-emerald-light);
-  pointer-events: none;
 }
 
 .cert-border-royal {
-  border: 18px double #061a16;
-  outline: 3px solid var(--kpalee-emerald);
-  outline-offset: -13px;
+  border: clamp(10px, 2.2vw, 20px) double #061a16;
+  outline: clamp(2px, 0.5vw, 3.5px) solid var(--kpalee-emerald);
+  outline-offset: clamp(-7px, -1.3vw, -14px);
 }
 
 .cert-border-classic {
-  border: 14px solid #0f766e;
-  outline: 4px double var(--kpalee-emerald);
-  outline-offset: -9px;
+  border: clamp(8px, 1.8vw, 16px) solid #0f766e;
+  outline: clamp(2px, 0.5vw, 4px) double var(--kpalee-emerald);
+  outline-offset: clamp(-5px, -1vw, -10px);
 }
 
 .cert-border-minimal {
   border: 2px solid var(--kpalee-emerald);
   outline: 1px solid #cbd5e1;
-  outline-offset: 8px;
+  outline-offset: 6px;
 }
 
 .cert-border-ornate {
-  border: 16px solid #061a16;
-  outline: 3px dashed var(--kpalee-emerald);
-  outline-offset: -10px;
-}
-
-/* Keyframe Animations */
-@keyframes slideUpFade {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-slide-up {
-  animation: slideUpFade 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes popIn {
-  0% { transform: scale(0.94); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.animate-pop-in {
-  animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  border: clamp(8px, 2vw, 18px) solid #061a16;
+  outline: 2px dashed var(--kpalee-emerald);
+  outline-offset: clamp(-6px, -1.2vw, -12px);
 }
 
 /* Navbar Responsive Display Helpers */
@@ -340,20 +335,10 @@ body {
 }
 
 /* ==========================================
-   COMPREHENSIVE MOBILE RESPONSIVENESS OVERRIDES
+   MOBILE MEDIA QUERIES
    ========================================== */
 
-@media (max-width: 1024px) {
-  .horizontal-scroll-item {
-    flex: 0 0 300px;
-  }
-}
-
 @media (max-width: 768px) {
-  body {
-    font-size: 0.9rem;
-  }
-
   .desktop-nav {
     display: none !important;
   }
@@ -362,48 +347,20 @@ body {
     display: inline-flex !important;
   }
 
-  /* Responsive Headings */
-  h1, .hero-title {
-    font-size: clamp(2.1rem, 7vw, 3.2rem) !important;
-    line-height: 1.2 !important;
+  /* Force Certificate Stage Scroll Containment */
+  .cert-responsive-stage {
+    overflow-x: auto !important;
   }
 
-  h2 {
-    font-size: clamp(1.75rem, 5vw, 2.5rem) !important;
-    line-height: 1.25 !important;
+  .cert-canvas-container {
+    min-width: 560px !important; /* Preserves exact landscape proportion without stretching or text overlapping */
   }
 
-  h3 {
-    font-size: clamp(1.3rem, 4vw, 1.8rem) !important;
-  }
-
-  /* Section Padding Reductions */
   section {
-    padding: 2.5rem 1rem !important;
+    padding: 2.25rem 0.85rem !important;
   }
 
   .glass-panel, .glass-panel-dark {
-    padding: 1.5rem 1.1rem !important;
-    border-radius: var(--radius-md) !important;
-  }
-
-  /* Horizontal Scroll Items */
-  .horizontal-scroll-item {
-    flex: 0 0 280px;
-  }
-
-  /* How It Works Sticky Cards on Mobile */
-  .how-it-works-card {
-    position: relative !important;
-    top: auto !important;
-    padding: 1.75rem 1.25rem !important;
-    min-height: auto !important;
-    margin-bottom: 1.25rem !important;
-  }
-
-  /* Certificate Canvas Mobile Display */
-  .cert-canvas-container {
-    min-width: 540px !important;
-    padding: 1.5rem 1.25rem !important;
+    padding: 1.25rem 1rem !important;
   }
 }
