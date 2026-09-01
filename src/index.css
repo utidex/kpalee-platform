@@ -95,6 +95,38 @@ body {
 .font-pinyon { font-family: var(--font-pinyon); }
 .font-alex { font-family: var(--font-alex); }
 
+/* Slow Floating Picture Keyframe Animation */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(1deg);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+/* Feature Grid Card Hover Glow */
+.hero-feature-card {
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-feature-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--kpalee-emerald);
+  box-shadow: 0 16px 35px -8px rgba(0, 168, 120, 0.22);
+}
+
 /* Infinite Right-to-Left Scrolling Logo Marquee */
 .marquee-wrapper {
   overflow: hidden;
