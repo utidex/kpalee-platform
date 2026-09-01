@@ -13,7 +13,8 @@ import {
   Palette, 
   Sliders, 
   Type, 
-  Layers
+  Layers,
+  ShieldAlert
 } from 'lucide-react';
 
 export default function HeroSection({ onCreateCertificateClick, onExploreTemplatesClick }) {
@@ -30,6 +31,11 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
   const [showQrCode, setShowQrCode] = useState(true);
   const [showSignature, setShowSignature] = useState(true);
   
+  // Security Watermark State
+  const [showWatermark, setShowWatermark] = useState(true);
+  const [watermarkText, setWatermarkText] = useState('KPALEE VERIFIED');
+  const [watermarkOpacity, setWatermarkOpacity] = useState(0.08);
+
   // Custom Signature Image Upload
   const [signatureImage, setSignatureImage] = useState(null);
 
@@ -56,7 +62,7 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
   return (
     <section style={{
       position: 'relative',
-      padding: '3.5rem 1.5rem 4.5rem 1.5rem',
+      padding: '3rem 1rem 4rem 1rem',
       maxWidth: '1440px',
       margin: '0 auto',
       overflow: 'hidden'
@@ -68,9 +74,9 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
         top: '-15%',
         left: '50%',
         transform: 'translateX(-50%)',
-        width: '700px',
-        height: '450px',
-        background: 'radial-gradient(circle, rgba(0, 168, 120, 0.18) 0%, rgba(15, 118, 110, 0.08) 50%, transparent 75%)',
+        width: '650px',
+        height: '400px',
+        background: 'radial-gradient(circle, rgba(0, 168, 120, 0.16) 0%, rgba(15, 118, 110, 0.06) 50%, transparent 75%)',
         pointerEvents: 'none',
         zIndex: 0
       }} />
@@ -78,25 +84,25 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
       {/* Hero Header Section */}
       <div style={{
         textAlign: 'center',
-        maxWidth: '880px',
-        margin: '0 auto 2.5rem auto',
+        maxWidth: '850px',
+        margin: '0 auto 2.25rem auto',
         position: 'relative',
         zIndex: 1
       }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem' }}>
-          <span className="badge badge-emerald" style={{ padding: '0.35rem 0.95rem', fontSize: '0.82rem' }}>
-            <Sparkles size={14} color="var(--kpalee-emerald)" /> Digital Recognition Engine
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+          <span className="badge badge-emerald" style={{ padding: '0.3rem 0.85rem', fontSize: '0.78rem' }}>
+            <Sparkles size={13} color="var(--kpalee-emerald)" /> Digital Recognition Engine
           </span>
-          <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>• Zero Recipient Login Needed</span>
+          <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', fontWeight: 600 }}>• Zero Recipient Login Needed</span>
         </div>
 
         <h1 className="font-serif animate-slide-up hero-title" style={{
-          fontSize: '3.8rem',
+          fontSize: '3.4rem',
           fontWeight: 800,
           color: 'var(--kpalee-dark-bg)',
-          lineHeight: 1.12,
+          lineHeight: 1.15,
           letterSpacing: '-0.03em',
-          marginBottom: '1.25rem'
+          marginBottom: '1rem'
         }}>
           Certificates people are <br />
           <span style={{
@@ -108,11 +114,11 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
           </span>
         </h1>
 
-        <p style={{
-          fontSize: '1.18rem',
+        <p className="hero-subtext" style={{
+          fontSize: '1.12rem',
           color: 'var(--text-muted)',
-          lineHeight: 1.65,
-          marginBottom: '2.25rem',
+          lineHeight: 1.6,
+          marginBottom: '1.75rem',
           fontWeight: 400
         }}>
           Design, issue, verify and showcase digital certificates & event badges at scale. <br />
@@ -120,19 +126,19 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
         </p>
 
         {/* Hero Action Buttons */}
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '0.85rem', justifyContent: 'center', flexWrap: 'wrap' }}>
           <button
             onClick={onCreateCertificateClick}
             className="btn-primary btn-mobile-full"
-            style={{ padding: '0.9rem 1.9rem', fontSize: '1.05rem' }}
+            style={{ padding: '0.8rem 1.75rem', fontSize: '1rem' }}
           >
-            Create a certificate <ArrowRight size={19} />
+            Create a certificate <ArrowRight size={18} />
           </button>
 
           <button
             onClick={onExploreTemplatesClick}
             className="btn-secondary btn-mobile-full"
-            style={{ padding: '0.9rem 1.9rem', fontSize: '1.05rem' }}
+            style={{ padding: '0.8rem 1.75rem', fontSize: '1rem' }}
           >
             Explore templates
           </button>
@@ -143,7 +149,7 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
       <div className="glass-panel animate-pop-in" style={{
         maxWidth: '1200px',
         margin: '0 auto',
-        padding: '1.75rem 1.25rem',
+        padding: '1.5rem 1rem',
         borderRadius: 'var(--radius-lg)',
         background: '#ffffff',
         boxShadow: 'var(--shadow-lg)',
@@ -154,24 +160,24 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
         {/* Editor Controls Header Bar */}
         <div style={{
           background: 'linear-gradient(135deg, var(--kpalee-mint-soft) 0%, #ffffff 100%)',
-          padding: '1.1rem 1.25rem',
+          padding: '1rem 1.15rem',
           borderRadius: 'var(--radius-md)',
           border: '1px solid rgba(0, 168, 120, 0.25)',
-          marginBottom: '1.5rem',
+          marginBottom: '1.25rem',
           display: 'flex',
           flexDirection: 'column',
-          gap: '1.1rem'
+          gap: '1rem'
         }}>
           
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
-            <span style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Sliders size={18} color="var(--kpalee-emerald)" /> Live Certificate Customizer
+            <span style={{ fontSize: '0.88rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)', display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+              <Sliders size={16} color="var(--kpalee-emerald)" /> Live Certificate Customizer
             </span>
-            <span className="badge badge-emerald">Real-Time Render</span>
+            <span className="badge badge-emerald">Real-Time Studio</span>
           </div>
 
           {/* Control Grid Row 1: Texts & 2-Line Toggle */}
-          <div className="editor-control-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.85rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: '0.75rem' }}>
             
             {/* Recipient Name */}
             <div className="form-group" style={{ margin: 0 }}>
@@ -182,7 +188,7 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
                 value={recipientName}
                 onChange={(e) => setRecipientName(e.target.value)}
                 placeholder="Recipient Name..."
-                style={{ padding: '0.45rem 0.75rem', fontSize: '0.88rem' }}
+                style={{ padding: '0.45rem 0.75rem', fontSize: '0.85rem' }}
               />
             </div>
 
@@ -195,7 +201,7 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
                 value={certTitle}
                 onChange={(e) => setCertTitle(e.target.value)}
                 placeholder="Title..."
-                style={{ padding: '0.45rem 0.75rem', fontSize: '0.88rem' }}
+                style={{ padding: '0.45rem 0.75rem', fontSize: '0.85rem' }}
               />
             </div>
 
@@ -206,7 +212,7 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
                 type="button"
                 onClick={() => setIsTwoLines(!isTwoLines)}
                 className={isTwoLines ? 'btn-primary' : 'btn-secondary'}
-                style={{ padding: '0.45rem 0.75rem', fontSize: '0.82rem', width: '100%', justifyContent: 'center' }}
+                style={{ padding: '0.45rem 0.75rem', fontSize: '0.8rem', width: '100%', justifyContent: 'center' }}
               >
                 {isTwoLines ? '2-Line Break' : 'Single Line'}
               </button>
@@ -222,7 +228,7 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
                   className={textAlign === 'left' ? 'btn-primary' : 'btn-secondary'}
                   style={{ padding: '0.45rem 0.6rem', flex: 1, justifyContent: 'center' }}
                 >
-                  <AlignLeft size={16} />
+                  <AlignLeft size={15} />
                 </button>
                 <button
                   type="button"
@@ -230,7 +236,7 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
                   className={textAlign === 'center' ? 'btn-primary' : 'btn-secondary'}
                   style={{ padding: '0.45rem 0.6rem', flex: 1, justifyContent: 'center' }}
                 >
-                  <AlignCenter size={16} />
+                  <AlignCenter size={15} />
                 </button>
                 <button
                   type="button"
@@ -238,41 +244,64 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
                   className={textAlign === 'right' ? 'btn-primary' : 'btn-secondary'}
                   style={{ padding: '0.45rem 0.6rem', flex: 1, justifyContent: 'center' }}
                 >
-                  <AlignRight size={16} />
+                  <AlignRight size={15} />
                 </button>
               </div>
             </div>
 
           </div>
 
-          {/* Control Grid Row 2: Colors, Signature Upload & Theme */}
-          <div className="editor-control-grid" style={{
+          {/* Control Grid Row 2: Colors, Signature Upload, Watermark & Theme */}
+          <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '0.85rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+            gap: '0.75rem',
             paddingTop: '0.65rem',
             borderTop: '1px solid rgba(0,168,120,0.15)',
             alignItems: 'center'
           }}>
             
+            {/* Security Watermark Controls */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+              <label className="form-label">Security Watermark</label>
+              <div style={{ display: 'flex', gap: '0.35rem' }}>
+                <button
+                  type="button"
+                  onClick={() => setShowWatermark(!showWatermark)}
+                  className={showWatermark ? 'btn-primary' : 'btn-secondary'}
+                  style={{ padding: '0.42rem 0.65rem', fontSize: '0.78rem' }}
+                >
+                  Watermark {showWatermark ? '✓' : 'Off'}
+                </button>
+                <input
+                  type="text"
+                  className="input-field"
+                  value={watermarkText}
+                  onChange={(e) => setWatermarkText(e.target.value)}
+                  placeholder="Watermark Text..."
+                  style={{ padding: '0.42rem 0.65rem', fontSize: '0.8rem', flex: 1 }}
+                />
+              </div>
+            </div>
+
             {/* Color Picker & Presets */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
               <label className="form-label">Theme Color</label>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <input
                   type="color"
                   value={activeColor}
                   onChange={(e) => setActiveColor(e.target.value)}
-                  style={{ width: '32px', height: '32px', border: 'none', borderRadius: '6px', cursor: 'pointer' }}
+                  style={{ width: '28px', height: '28px', border: 'none', borderRadius: '6px', cursor: 'pointer' }}
                 />
-                <div style={{ display: 'flex', gap: '0.3rem' }}>
+                <div style={{ display: 'flex', gap: '0.25rem' }}>
                   {presetColors.map(c => (
                     <button
                       key={c.hex}
                       onClick={() => setActiveColor(c.hex)}
                       style={{
-                        width: '22px',
-                        height: '22px',
+                        width: '20px',
+                        height: '20px',
                         borderRadius: '50%',
                         background: c.hex,
                         border: activeColor === c.hex ? '2px solid #061a16' : '1px solid #fff',
@@ -287,8 +316,8 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
             {/* Manual Signature Upload */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
               <label className="form-label">Manual Signature</label>
-              <label className="btn-secondary" style={{ padding: '0.42rem 0.75rem', fontSize: '0.8rem', cursor: 'pointer', justifyContent: 'center' }}>
-                <UploadCloud size={15} color="var(--kpalee-emerald)" /> {signatureImage ? 'Change Image' : 'Upload Signature'}
+              <label className="btn-secondary" style={{ padding: '0.42rem 0.75rem', fontSize: '0.78rem', cursor: 'pointer', justifyContent: 'center' }}>
+                <UploadCloud size={14} color="var(--kpalee-emerald)" /> {signatureImage ? 'Change Image' : 'Upload Signature'}
                 <input type="file" accept="image/*" onChange={handleSignatureUpload} style={{ display: 'none' }} />
               </label>
             </div>
@@ -300,7 +329,7 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
                 className="select-field"
                 value={borderTheme}
                 onChange={(e) => setBorderTheme(e.target.value)}
-                style={{ padding: '0.42rem 0.75rem', fontSize: '0.82rem' }}
+                style={{ padding: '0.42rem 0.65rem', fontSize: '0.8rem' }}
               >
                 <option value="cert-border-gold">Mint Filigree Frame</option>
                 <option value="cert-border-royal">Royal Double Border</option>
@@ -315,7 +344,7 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
         </div>
 
         {/* Live Dynamic Certificate Canvas Stage */}
-        <div className="cert-responsive-stage">
+        <div className="cert-stage-wrapper">
           <div
             className={`cert-canvas-container ${borderTheme}`}
             style={{
@@ -324,13 +353,25 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
               textAlign: textAlign
             }}
           >
+            {/* Watermark Security Text Overlay */}
+            {showWatermark && (
+              <div className="cert-watermark-overlay">
+                <div
+                  className="cert-watermark-text"
+                  style={{ color: activeColor, opacity: watermarkOpacity }}
+                >
+                  {watermarkText}
+                </div>
+              </div>
+            )}
+
             {/* Header Org Title */}
             <div className="cert-org-header" style={{ fontWeight: 800, letterSpacing: '0.18em', color: 'var(--kpalee-dark-bg)', textTransform: 'uppercase' }}>
               ANTIGRAVITY ACADEMY & KPALEE PLATFORM
             </div>
 
             {/* Certificate Body */}
-            <div style={{ width: '100%', margin: '0.5rem 0' }}>
+            <div style={{ width: '100%', margin: '0.4rem 0' }}>
               
               {/* Title (Single line or 2-line break) */}
               <h2
@@ -342,7 +383,7 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
                   color: '#061a16',
                   textTransform: 'uppercase',
                   lineHeight: 1.18,
-                  margin: '0.2rem 0'
+                  margin: '0.15rem 0'
                 }}
               >
                 {isTwoLines ? (
@@ -355,7 +396,7 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
                 )}
               </h2>
 
-              <p style={{ fontFamily: 'Montserrat', fontSize: '0.8rem', fontStyle: 'italic', color: '#475569', margin: '0.2rem 0' }}>
+              <p style={{ fontFamily: 'Montserrat', fontSize: '0.78rem', fontStyle: 'italic', color: '#475569', margin: '0.15rem 0' }}>
                 This is proudly conferred upon
               </p>
 
@@ -366,7 +407,7 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
                   fontFamily: signatureFont,
                   fontWeight: 600,
                   color: activeColor,
-                  margin: '0.2rem 0',
+                  margin: '0.15rem 0',
                   lineHeight: 1.1
                 }}
               >
@@ -374,13 +415,13 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
               </h3>
 
               <div style={{
-                width: '160px',
+                width: '150px',
                 height: '2px',
                 background: `linear-gradient(90deg, transparent, ${activeColor}, transparent)`,
-                margin: textAlign === 'center' ? '0.3rem auto 0.6rem auto' : textAlign === 'right' ? '0.3rem 0 0.6rem auto' : '0.3rem auto 0.6rem 0'
+                margin: textAlign === 'center' ? '0.25rem auto 0.5rem auto' : textAlign === 'right' ? '0.25rem 0 0.5rem auto' : '0.25rem auto 0.5rem 0'
               }} />
 
-              <p className="cert-citation-text" style={{ fontFamily: 'Montserrat', color: '#103830', maxWidth: '580px', margin: textAlign === 'center' ? '0 auto' : '0' }}>
+              <p className="cert-citation-text" style={{ fontFamily: 'Montserrat', color: '#103830', maxWidth: '560px', margin: textAlign === 'center' ? '0 auto' : '0' }}>
                 for outstanding achievements in Advanced Full-Stack Architecture, Digital Recognition & Event Identity Systems.
               </p>
             </div>
@@ -390,7 +431,7 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
               {/* Date */}
               <div style={{ textAlign: 'left' }}>
                 <div className="cert-footer-text" style={{ fontWeight: 700, color: '#061a16' }}>September 1, 2026</div>
-                <div style={{ borderTop: '1px solid #a1e9c9', marginTop: '0.15rem', paddingTop: '0.15rem', fontSize: '0.62rem', color: '#476355', fontWeight: 700 }}>
+                <div style={{ borderTop: '1px solid #a1e9c9', marginTop: '0.15rem', paddingTop: '0.15rem', fontSize: '0.6rem', color: '#476355', fontWeight: 700 }}>
                   DATE ISSUED
                 </div>
               </div>
@@ -398,27 +439,27 @@ export default function HeroSection({ onCreateCertificateClick, onExploreTemplat
               {/* QR Code Tag */}
               {showQrCode && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.15rem' }}>
-                  <div style={{ background: '#f8faf9', padding: '0.3rem', borderRadius: '6px', border: '1px solid #d1f2e4' }}>
-                    <QrCode size={34} color="var(--kpalee-dark-bg)" />
+                  <div style={{ background: '#f8faf9', padding: '0.25rem', borderRadius: '6px', border: '1px solid #d1f2e4' }}>
+                    <QrCode size={30} color="var(--kpalee-dark-bg)" />
                   </div>
-                  <span style={{ fontSize: '0.62rem', fontWeight: 800, color: activeColor }}>ID: KP-2026-004829</span>
+                  <span style={{ fontSize: '0.6rem', fontWeight: 800, color: activeColor }}>ID: KP-2026-004829</span>
                 </div>
               )}
 
               {/* Signature (Manual Image or Calligraphic Font) */}
-              <div style={{ textAlign: 'right', minWidth: '130px' }}>
+              <div style={{ textAlign: 'right', minWidth: '120px' }}>
                 {signatureImage ? (
                   <img
                     src={signatureImage}
                     alt="Uploaded Signature"
-                    style={{ maxHeight: '42px', objectFit: 'contain', margin: '0 0 0 auto', display: 'block' }}
+                    style={{ maxHeight: '38px', objectFit: 'contain', margin: '0 0 0 auto', display: 'block' }}
                   />
                 ) : (
-                  <div style={{ fontFamily: signatureFont, fontSize: '1.75rem', color: '#061a16', lineHeight: 1 }}>
+                  <div style={{ fontFamily: signatureFont, fontSize: '1.6rem', color: '#061a16', lineHeight: 1 }}>
                     Alexander Vance
                   </div>
                 )}
-                <div style={{ borderTop: '1px solid #a1e9c9', marginTop: '0.15rem', paddingTop: '0.15rem', fontSize: '0.62rem', color: '#476355', fontWeight: 700 }}>
+                <div style={{ borderTop: '1px solid #a1e9c9', marginTop: '0.15rem', paddingTop: '0.15rem', fontSize: '0.6rem', color: '#476355', fontWeight: 700 }}>
                   DIRECTOR OF LEARNING
                 </div>
               </div>

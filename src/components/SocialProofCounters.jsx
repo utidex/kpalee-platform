@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Building2, Calendar, CheckCircle2, ShieldCheck, Users } from 'lucide-react';
+import { Award, Building2, Calendar, CheckCircle2 } from 'lucide-react';
 
 export default function SocialProofCounters() {
   const stats = [
@@ -14,40 +14,40 @@ export default function SocialProofCounters() {
       borderTop: '1px solid var(--border-color)',
       borderBottom: '1px solid var(--border-color)',
       background: 'rgba(255, 255, 255, 0.7)',
-      padding: '3rem 2rem'
+      padding: '2rem 1rem'
     }}>
-      <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
-        <p style={{ textAlign: 'center', fontSize: '0.85rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--text-muted)', marginBottom: '2rem' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <p style={{ textAlign: 'center', fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
           Trusted by top creators, schools, communities & event teams
         </p>
 
-        <div style={{
+        <div className="social-proof-grid" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: '1.75rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+          gap: '1.25rem',
           textAlign: 'center'
         }}>
           {stats.map((stat, idx) => {
             const Icon = stat.icon;
             return (
-              <div key={idx} className="glass-panel" style={{ padding: '1.75rem 1.25rem', borderRadius: 'var(--radius-md)', background: '#ffffff' }}>
+              <div key={idx} className="glass-panel" style={{ padding: '1.25rem 0.85rem', borderRadius: 'var(--radius-md)', background: '#ffffff' }}>
                 <div style={{
-                  width: '46px',
-                  height: '46px',
-                  borderRadius: '12px',
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '10px',
                   background: 'var(--kpalee-mint-soft)',
                   color: stat.color,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  margin: '0 auto 1rem auto'
+                  margin: '0 auto 0.65rem auto'
                 }}>
-                  <Icon size={24} />
+                  <Icon size={20} />
                 </div>
-                <div style={{ fontSize: '2.4rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)', marginBottom: '0.35rem' }}>
+                <div className="social-stat-number" style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)', marginBottom: '0.2rem' }}>
                   {stat.value}
                 </div>
-                <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>
                   {stat.label}
                 </div>
               </div>
