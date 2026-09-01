@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, Quote, Building2, CheckCircle2 } from 'lucide-react';
+import { Star, Building2, Quote, CheckCircle2 } from 'lucide-react';
 
 export default function TestimonialsSection() {
   const brands = [
@@ -10,6 +10,9 @@ export default function TestimonialsSection() {
     { name: 'Flutterwave', label: 'Fintech' },
     { name: 'Ingressive For Good', label: 'Non-Profit' }
   ];
+
+  // Duplicate brands array for seamless infinite marquee scroll
+  const marqueeBrands = [...brands, ...brands, ...brands];
 
   const testimonials = [
     {
@@ -36,40 +39,39 @@ export default function TestimonialsSection() {
   ];
 
   return (
-    <section style={{ padding: '5.5rem 1.5rem', background: 'var(--bg-main)', borderTop: '1px solid var(--border-color)' }}>
+    <section style={{ padding: '5.5rem 1.5rem', background: 'var(--bg-main)', borderTop: '1px solid var(--border-color)', overflow: 'hidden' }}>
       <div style={{ maxWidth: '1350px', margin: '0 auto' }}>
         
-        {/* Partner Brands Logo Bar */}
+        {/* Infinite Right-to-Left Partner Brands Marquee */}
         <div style={{ textAlign: 'center', marginBottom: '4.5rem' }}>
           <p style={{ fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--text-muted)', marginBottom: '1.75rem' }}>
             Trusted By Leading Academies, Event Organizers & Tech Communities
           </p>
 
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '1.25rem',
-            flexWrap: 'wrap'
-          }}>
-            {brands.map((b, idx) => (
-              <div
-                key={idx}
-                className="glass-panel"
-                style={{
-                  padding: '0.65rem 1.35rem',
-                  borderRadius: 'var(--radius-full)',
-                  background: '#ffffff',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  boxShadow: 'var(--shadow-sm)'
-                }}
-              >
-                <Building2 size={16} color="var(--kpalee-emerald)" />
-                <span style={{ fontSize: '0.88rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)' }}>{b.name}</span>
-              </div>
-            ))}
+          <div className="marquee-wrapper">
+            <div className="marquee-track">
+              {marqueeBrands.map((b, idx) => (
+                <div
+                  key={idx}
+                  className="glass-panel"
+                  style={{
+                    padding: '0.75rem 1.5rem',
+                    borderRadius: 'var(--radius-full)',
+                    background: '#ffffff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.6rem',
+                    boxShadow: 'var(--shadow-sm)',
+                    flexShrink: 0
+                  }}
+                >
+                  <Building2 size={18} color="var(--kpalee-emerald)" />
+                  <span style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)', whiteSpace: 'nowrap' }}>
+                    {b.name}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -86,7 +88,7 @@ export default function TestimonialsSection() {
           </p>
         </div>
 
-        {/* Testimonials Cards Grid */}
+        {/* Dynamic 3D Hover & Glow Testimonial Cards Grid */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
@@ -95,26 +97,17 @@ export default function TestimonialsSection() {
           {testimonials.map((item, idx) => (
             <div
               key={idx}
-              className="glass-panel"
-              style={{
-                padding: '2.25rem',
-                borderRadius: 'var(--radius-lg)',
-                background: '#ffffff',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                position: 'relative'
-              }}
+              className="testimonial-card"
             >
               <div>
                 {/* Rating Stars */}
-                <div style={{ display: 'flex', gap: '0.25rem', color: '#f59e0b', marginBottom: '1.1rem' }}>
+                <div style={{ display: 'flex', gap: '0.25rem', color: '#f59e0b', marginBottom: '1.25rem' }}>
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} fill="#f59e0b" />
+                    <Star key={i} size={17} fill="#f59e0b" />
                   ))}
                 </div>
 
-                <p style={{ fontSize: '0.96rem', color: 'var(--text-main)', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '1.75rem' }}>
+                <p style={{ fontSize: '0.98rem', color: 'var(--text-main)', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '2rem' }}>
                   "{item.quote}"
                 </p>
               </div>
@@ -123,13 +116,13 @@ export default function TestimonialsSection() {
                 <img
                   src={item.avatar}
                   alt={item.author}
-                  style={{ width: '46px', height: '46px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--kpalee-emerald)' }}
+                  style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--kpalee-emerald)' }}
                 />
                 <div>
-                  <h4 style={{ fontSize: '0.98rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)' }}>
+                  <h4 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)' }}>
                     {item.author}
                   </h4>
-                  <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'block' }}>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block' }}>
                     {item.title} • <strong>{item.org}</strong>
                   </span>
                 </div>

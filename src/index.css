@@ -95,38 +95,81 @@ body {
 .font-pinyon { font-family: var(--font-pinyon); }
 .font-alex { font-family: var(--font-alex); }
 
-/* Horizontal Scrolling Carousel Track */
-.horizontal-scroll-container {
+/* Infinite Right-to-Left Scrolling Logo Marquee */
+.marquee-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.marquee-track {
   display: flex;
   gap: 1.5rem;
-  overflow-x: auto;
-  padding: 0.8rem 0.2rem 1.25rem 0.2rem;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  width: 100%;
-}
-.horizontal-scroll-item {
-  flex: 0 0 320px;
-  scroll-snap-align: start;
+  width: max-content;
+  animation: marqueeRightToLeft 22s linear infinite;
 }
 
-/* Glassmorphism Cards */
-.glass-panel {
-  background: var(--bg-card);
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeRightToLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Dynamic Hover Review Testimonial Cards */
+.testimonial-card {
+  background: #ffffff;
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
-  transition: all var(--transition-smooth);
-}
-
-.glass-panel-dark {
-  background: linear-gradient(135deg, var(--kpalee-dark-bg) 0%, var(--kpalee-dark-surface) 100%);
-  color: #ffffff;
-  border: 1px solid rgba(0, 168, 120, 0.25);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
+  padding: 2.25rem;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
   overflow: hidden;
+}
+
+.testimonial-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--kpalee-emerald), var(--kpalee-teal));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--kpalee-emerald);
+  box-shadow: 0 20px 40px -10px rgba(0, 168, 120, 0.25);
+}
+
+.testimonial-card:hover::after {
+  opacity: 1;
+}
+
+/* Interactive Metric Cards Pulse & Click Effect */
+.metric-card-interactive {
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card-interactive:hover {
+  transform: translateY(-5px) scale(1.03);
+  border-color: var(--kpalee-emerald) !important;
+  box-shadow: 0 14px 30px rgba(0, 168, 120, 0.22) !important;
+}
+
+.metric-card-interactive:active {
+  transform: scale(0.97);
 }
 
 /* Buttons */
@@ -189,6 +232,25 @@ body {
   font-size: 0.9rem;
 }
 
+/* Glassmorphism Cards */
+.glass-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-smooth);
+}
+
+.glass-panel-dark {
+  background: linear-gradient(135deg, var(--kpalee-dark-bg) 0%, var(--kpalee-dark-surface) 100%);
+  color: #ffffff;
+  border: 1px solid rgba(0, 168, 120, 0.25);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
 /* Forms & Inputs */
 .form-group {
   display: flex;
@@ -217,10 +279,6 @@ body {
   outline: none;
   width: 100%;
   transition: all var(--transition-fast);
-}
-.input-field:focus {
-  border-color: var(--kpalee-emerald);
-  box-shadow: 0 0 0 3px rgba(0, 168, 120, 0.15);
 }
 
 .select-field {
@@ -253,10 +311,7 @@ body {
   border: 1px solid rgba(0, 168, 120, 0.4);
 }
 
-/* ==========================================
-   PERFECT RESPONSIVE CERTIFICATE CANVAS & STAGE
-   ========================================== */
-
+/* Certificate Canvas Container */
 .cert-stage-wrapper {
   width: 100%;
   display: flex;
@@ -346,13 +401,6 @@ body {
   outline-offset: clamp(-5px, -1vw, -10px);
   position: relative;
 }
-.cert-border-gold::before {
-  content: '';
-  position: absolute;
-  inset: 6px;
-  border: 1.5px solid var(--kpalee-emerald-light);
-  pointer-events: none;
-}
 
 .cert-border-royal {
   border: clamp(8px, 2vw, 18px) double #061a16;
@@ -378,7 +426,7 @@ body {
   outline-offset: clamp(-5px, -1vw, -10px);
 }
 
-/* Desktop vs Mobile Navigation Display Helpers */
+/* Desktop vs Mobile Display Helpers */
 .desktop-nav {
   display: flex !important;
 }
@@ -386,66 +434,25 @@ body {
   display: none !important;
 }
 
-/* ==========================================
-   COMPREHENSIVE MOBILE RESPONSIVENESS OVERRIDES
-   ========================================== */
-
 @media (max-width: 768px) {
-  body {
-    font-size: 0.85rem;
-  }
-
-  .desktop-nav {
-    display: none !important;
-  }
-
-  .mobile-hamburger-btn {
-    display: inline-flex !important;
-  }
-
-  /* Compact Responsive Headings on Mobile */
+  body { font-size: 0.85rem; }
+  .desktop-nav { display: none !important; }
+  .mobile-hamburger-btn { display: inline-flex !important; }
+  
   h1, .hero-title {
     font-size: 1.8rem !important;
     line-height: 1.25 !important;
-    letter-spacing: -0.01em !important;
   }
-
-  h2 {
-    font-size: 1.45rem !important;
-    line-height: 1.28 !important;
-  }
-
-  h3 {
-    font-size: 1.15rem !important;
-  }
-
-  /* Compact Hero Subtitle & Badges */
-  .hero-subtext {
-    font-size: 0.92rem !important;
-    line-height: 1.5 !important;
-    margin-bottom: 1.5rem !important;
-  }
-
-  /* Section Padding Reductions for Mobile */
-  section {
-    padding: 2rem 0.75rem !important;
-  }
-
-  .glass-panel, .glass-panel-dark {
-    padding: 1.15rem 0.85rem !important;
-    border-radius: 16px !important;
-  }
-
-  /* Social Metric Cards Compact Grid */
+  h2 { font-size: 1.45rem !important; }
+  h3 { font-size: 1.15rem !important; }
+  
+  section { padding: 2rem 0.75rem !important; }
+  
   .social-proof-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 0.75rem !important;
   }
-  .social-stat-number {
-    font-size: 1.45rem !important;
-  }
-
-  /* Full Width Buttons on Mobile */
+  
   .btn-mobile-full {
     width: 100% !important;
     justify-content: center !important;
