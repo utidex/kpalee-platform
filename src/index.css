@@ -120,37 +120,60 @@ body {
   100% { transform: translateX(-50%); }
 }
 
-/* Dynamic Hover Review Testimonial Cards */
-.testimonial-card {
-  background: #ffffff;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 2.25rem;
-  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  position: relative;
-  overflow: hidden;
-}
+/* ==========================================
+   3D FLIP TESTIMONIAL REVIEW CARD STYLES
+   ========================================== */
 
-.testimonial-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
+.flip-card-container {
+  background-color: transparent;
   width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--kpalee-emerald), var(--kpalee-teal));
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  height: 320px;
+  perspective: 1000px;
+  cursor: pointer;
 }
 
-.testimonial-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: var(--kpalee-emerald);
-  box-shadow: 0 20px 40px -10px rgba(0, 168, 120, 0.25);
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
 }
 
-.testimonial-card:hover::after {
-  opacity: 1;
+.flip-card-container:hover .flip-card-inner,
+.flip-card-container.is-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Front Side: Emerald Green Background with Client Info & 5-Stars */
+.flip-card-front {
+  background: linear-gradient(135deg, var(--kpalee-dark-bg) 0%, #00a878 100%);
+  color: #ffffff;
+  border: 1.5px solid rgba(0, 168, 120, 0.4);
+}
+
+/* Back Side: White Panel showing the full review text */
+.flip-card-back {
+  background: #ffffff;
+  color: var(--text-main);
+  border: 1.5px solid var(--kpalee-emerald);
+  transform: rotateY(180deg);
+  text-align: left;
 }
 
 /* Interactive Metric Cards Pulse & Click Effect */
@@ -209,11 +232,6 @@ body {
   box-shadow: var(--shadow-sm);
   white-space: nowrap;
   font-size: 0.9rem;
-}
-.btn-secondary:hover {
-  background: var(--kpalee-mint-soft);
-  border-color: rgba(0, 168, 120, 0.5);
-  color: var(--kpalee-emerald);
 }
 
 .btn-accent {
@@ -311,7 +329,7 @@ body {
   border: 1px solid rgba(0, 168, 120, 0.4);
 }
 
-/* Certificate Canvas Container */
+/* Certificate Canvas Stage */
 .cert-stage-wrapper {
   width: 100%;
   display: flex;
@@ -401,6 +419,13 @@ body {
   outline-offset: clamp(-5px, -1vw, -10px);
   position: relative;
 }
+.cert-border-gold::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1.5px solid var(--kpalee-emerald-light);
+  pointer-events: none;
+}
 
 .cert-border-royal {
   border: clamp(8px, 2vw, 18px) double #061a16;
@@ -456,5 +481,9 @@ body {
   .btn-mobile-full {
     width: 100% !important;
     justify-content: center !important;
+  }
+
+  .flip-card-container {
+    height: 340px !important;
   }
 }
