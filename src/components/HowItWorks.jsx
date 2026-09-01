@@ -43,53 +43,52 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section style={{ padding: '5rem 1.5rem 6rem 1.5rem', maxWidth: '1350px', margin: '0 auto', overflow: 'visible' }}>
+    <section style={{ padding: '5rem 1.25rem 6rem 1.25rem', maxWidth: '1280px', margin: '0 auto', overflow: 'visible' }}>
       
       {/* Section Header */}
       <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 3.5rem auto' }}>
         <span className="badge badge-emerald" style={{ marginBottom: '0.85rem', padding: '0.35rem 0.9rem' }}>
           FRICTIONLESS WORKFLOW
         </span>
-        <h2 className="font-serif" style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)', marginBottom: '0.85rem', lineHeight: 1.15 }}>
+        <h2 className="font-serif" style={{ fontSize: '2.8rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)', marginBottom: '0.85rem', lineHeight: 1.15 }}>
           How Kpalee Works
         </h2>
-        <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+        <p style={{ fontSize: '1.08rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
           From bulk recipient upload to instant certificate delivery — issuing credentials has never been this smooth.
         </p>
       </div>
 
-      {/* Sticky Stacking Collapsing Scroll Cards Container for PC */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', position: 'relative' }}>
+      {/* Sticky Stacking Collapsing Scroll Cards Container (PC & Mobile Compatible) */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', position: 'relative', overflow: 'visible' }}>
         {steps.map((step, idx) => {
           const Icon = step.icon;
           return (
             <div
               key={step.num}
-              className="how-it-works-card"
               style={{
                 position: 'sticky',
-                top: `${100 + idx * 25}px`,
+                top: `${95 + idx * 22}px`,
                 zIndex: idx + 1,
                 background: '#ffffff',
                 border: '1.5px solid var(--border-color)',
                 borderRadius: 'var(--radius-lg)',
-                padding: '3rem 3.5rem',
-                boxShadow: `0 ${10 + idx * 8}px ${30 + idx * 10}px rgba(6, 26, 22, ${0.08 + idx * 0.03})`,
+                padding: '2.5rem 2.25rem',
+                boxShadow: `0 ${10 + idx * 6}px ${25 + idx * 8}px rgba(6, 26, 22, ${0.08 + idx * 0.03})`,
                 transition: 'all 0.3s ease',
-                marginBottom: '1rem'
+                marginBottom: '1.5rem'
               }}
             >
-              <div className="how-it-works-grid" style={{
+              <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                gap: '2.5rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gap: '2rem',
                 alignItems: 'center'
               }}>
                 
                 {/* Left Step Details */}
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.1rem' }}>
-                    <span style={{ fontSize: '2.5rem', fontWeight: 900, color: step.color, lineHeight: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginBottom: '1rem' }}>
+                    <span style={{ fontSize: '2.4rem', fontWeight: 900, color: step.color, lineHeight: 1 }}>
                       {step.num}
                     </span>
                     <span
@@ -99,7 +98,7 @@ export default function HowItWorks() {
                         border: `1px solid ${step.color}40`,
                         padding: '0.35rem 0.85rem',
                         borderRadius: '999px',
-                        fontSize: '0.75rem',
+                        fontSize: '0.72rem',
                         fontWeight: 800,
                         letterSpacing: '0.06em'
                       }}
@@ -108,11 +107,11 @@ export default function HowItWorks() {
                     </span>
                   </div>
 
-                  <h3 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)', marginBottom: '0.75rem' }}>
+                  <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--kpalee-dark-bg)', marginBottom: '0.75rem' }}>
                     {step.title}
                   </h3>
 
-                  <p style={{ fontSize: '1.02rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                  <p style={{ fontSize: '1rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
                     {step.desc}
                   </p>
                 </div>
@@ -121,42 +120,42 @@ export default function HowItWorks() {
                 <div style={{
                   background: step.bgColor,
                   borderRadius: 'var(--radius-md)',
-                  padding: '1.5rem',
+                  padding: '1.25rem',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   border: `1.5px solid ${step.color}30`,
-                  boxShadow: '0 10px 25px rgba(0,0,0,0.04)'
+                  boxShadow: '0 8px 20px rgba(0,0,0,0.04)'
                 }}>
                   {step.num === '02' ? (
                     <img
                       src={stepPreviewImg}
                       alt="CSV Recipient Import Illustration"
-                      style={{ width: '100%', maxHeight: '190px', objectFit: 'contain', borderRadius: 'var(--radius-sm)' }}
+                      style={{ width: '100%', maxHeight: '180px', objectFit: 'contain', borderRadius: 'var(--radius-sm)' }}
                     />
                   ) : (
                     <div style={{
                       width: '100%',
-                      padding: '1.5rem',
+                      padding: '1.35rem',
                       background: '#ffffff',
                       borderRadius: 'var(--radius-sm)',
                       textAlign: 'center',
                       border: '1px solid var(--border-color)'
                     }}>
                       <div style={{
-                        width: '58px',
-                        height: '58px',
-                        borderRadius: '16px',
+                        width: '54px',
+                        height: '54px',
+                        borderRadius: '14px',
                         background: step.bgColor,
                         color: step.color,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        margin: '0 auto 0.75rem auto'
+                        margin: '0 auto 0.65rem auto'
                       }}>
-                        <Icon size={28} />
+                        <Icon size={26} />
                       </div>
-                      <strong style={{ fontSize: '0.95rem', color: 'var(--kpalee-dark-bg)', display: 'block' }}>
+                      <strong style={{ fontSize: '0.92rem', color: 'var(--kpalee-dark-bg)', display: 'block' }}>
                         {step.title} Preview
                       </strong>
                       <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Automated Kpalee Workflow</span>

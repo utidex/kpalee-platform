@@ -4,9 +4,11 @@ import HeroSection from './components/HeroSection';
 import SocialProofCounters from './components/SocialProofCounters';
 import HowItWorks from './components/HowItWorks';
 import FeatureShowcase from './components/FeatureShowcase';
+import TestimonialsSection from './components/TestimonialsSection';
 import PricingCalculator from './components/PricingCalculator';
 import DesignPathsSection from './components/DesignPathsSection';
 import VerificationSection from './components/VerificationSection';
+import FaqSection from './components/FaqSection';
 import EmailSimulationModal from './components/EmailSimulationModal';
 import Footer from './components/Footer';
 
@@ -158,6 +160,8 @@ export default function App() {
               onBadgesClick={() => setCurrentView('badges')}
             />
 
+            <TestimonialsSection />
+
             <PricingCalculator
               currency={currency}
               setCurrency={setCurrency}
@@ -183,6 +187,8 @@ export default function App() {
             <VerificationSection
               onVerifySearch={handleSelectCertificateView}
             />
+
+            <FaqSection />
           </div>
         )}
 
